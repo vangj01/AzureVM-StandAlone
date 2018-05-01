@@ -7,7 +7,7 @@
       "type": "string",
       "metadata": {
         "description": "Specify the RG Name."
-      }
+        }
       },
       "VMName": {
         "type": "string",
