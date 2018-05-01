@@ -12,7 +12,6 @@
     },
     "VMAdminUserName": {
       "type": "string",
-      "DefaultValue": "vmAdmin",
       "minLength": 1
     },
     "VMAdminPassword": {
@@ -52,7 +51,8 @@
         "DEV",
         "LAB",
         "DR",
-        "QA"
+        "QA",
+        "POC"
       ],
       "metadata": {
         "description": "Specify the Environment Type."
@@ -90,7 +90,7 @@
         "description": "Specify the SA Name."
       }
     },
-    "ResourceGroupName": {
+    "ResourceGroup": {
       "type": "string",
       "metadata": {
         "description": "Specify the RG Name."
@@ -139,7 +139,7 @@
     "VM-ImageOffer": "WindowsServer",
     "VM-OSDiskName": "[concat(parameters('VMName'), '-OSDisk')]",
     "VM-dataDiskName": "[concat(parameters('VMName'), '-dataDisk01')]",
-    "VM-VnetID": "[resourceId(parameters('ResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "VM-VnetID": "[resourceId(parameters('ResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "VM-SubnetRef": "[concat(variables('VM-VnetID'), '/subnets/', parameters('virtualNetworkSubnet'))]",
     "VM-StorageAccountContainerName": "vhds",
     "VM-NicName": "[concat(parameters('VMName'), '-NIC1')]"
@@ -213,7 +213,7 @@
           "osDisk": {
             "name": "[concat(parameters('VMName'), '-OSDisk')]",
             "vhd": {
-              "uri": "[concat(reference(resourceId(parameters('ResourceGroupName'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('VM-StorageAccountContainerName'), '/', variables('VM-OSDiskName'), '.vhd')]"
+              "uri": "[concat(reference(resourceId(parameters('ResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('VM-StorageAccountContainerName'), '/', variables('VM-OSDiskName'), '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -223,7 +223,7 @@
               "lun": 0,
               "name": "[concat(parameters('VMName'), '-dataDisk01')]",
               "vhd": {
-                "uri": "[concat(reference(resourceId(parameters('ResourceGroupName'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('VM-StorageAccountContainerName'), '/', variables('VM-dataDiskName'), '.vhd')]"
+                "uri": "[concat(reference(resourceId(parameters('ResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('VM-StorageAccountContainerName'), '/', variables('VM-dataDiskName'), '.vhd')]"
               },
               "caching": "ReadWrite",
               "createOption": "Empty",
