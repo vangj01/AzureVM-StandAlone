@@ -59,7 +59,9 @@
           "LAB",
           "DR",
           "QA",
-          "POC"
+          "POC",
+          "SHR",
+          "UAT"
         ],
         "metadata": {
           "description": "Specify the Environment Type."
@@ -70,17 +72,6 @@
       },
       "TAGFunction": {
         "type": "string",
-        "allowedValues": [
-          "APP",
-          "DB",
-          "DC",
-          "FS",
-          "FTP",
-          "JMP",
-          "MSG",
-          "TMP",
-          "WEB"
-        ],
         "metadata": {
           "description": "Specify the Function of the VM."
         }
