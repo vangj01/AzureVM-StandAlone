@@ -82,12 +82,18 @@
           "description": "Specify the Application Name."
         }
       },
-      "storageAccountName": {
-        "type": "string",
-        "metadata": {
-          "description": "Specify the SA Name."
-        }
-      },
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specify the SA Name."
+      }
+    },
+    "VirtualNetworkRGName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specify the VNet Resource Group name."
+      }
+    },
       "virtualNetworkName": {
         "type": "string",
         "metadata": {
@@ -112,7 +118,7 @@
           "description": "Specify the DNS addresses."
         }
       },
-      "VMSize": {
+      "VMTier": {
         "type": "string",
         "metadata": {
           "description": "Specify the VM tier Size."
@@ -131,7 +137,7 @@
       "VM-ImageOffer": "WindowsServer",
       "VM-OSDiskName": "[concat(parameters('VMName'), '-OSDisk')]",
       "VM-dataDiskName": "[concat(parameters('VMName'), '-dataDisk01')]",
-      "VM-VnetID": "[resourceId(parameters('RGName'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+      "VM-VnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
       "VM-SubnetRef": "[concat(variables('VM-VnetID'), '/subnets/', parameters('virtualNetworkSubnet'))]",
       "VM-StorageAccountContainerName": "vhds",
       "VM-NicName": "[concat(parameters('VMName'), '-NIC1')]"
@@ -187,7 +193,7 @@
         },
         "properties": {
           "hardwareProfile": {
-            "vmSize": "[parameters('VMSize')]"
+            "vmSize": "[parameters('VMTier')]"
           },
           "osProfile": {
             "computerName": "[parameters('VMName')]",
